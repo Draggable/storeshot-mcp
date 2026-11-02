@@ -1,0 +1,64 @@
+{
+  "name": "@draggable/storeshot-mcp",
+  "version": "2.53.0",
+  "description": "Storeshot MCP server: App Store and Google Play screenshots from Claude Code, Cursor and other AI coding tools.",
+  "keywords": [
+    "storeshot",
+    "mcp",
+    "model context protocol",
+    "app store",
+    "google play",
+    "screenshots"
+  ],
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Draggable/storeshot-mcp.git"
+  },
+  "homepage": "https://storeshot.art/docs/",
+  "bugs": {
+    "email": "support@storeshot.art"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "bin": {
+    "storeshot-mcp": "dist/bin.js"
+  },
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p test/tsconfig.json",
+    "build": "node scripts/build.mjs",
+    "test": "vitest run",
+    "test:bin": "node --test 'test-dist/*.test.mjs'",
+    "check:package": "node scripts/check-package.mjs",
+    "prepublishOnly": "node scripts/prepublish-guard.mjs"
+  },
+  "dependencies": {
+    "@draggable/storeshot-sdk": "2.53.0",
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "yauzl": "3.4.0",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "25.9.3",
+    "@types/yauzl": "3.4.0",
+    "ajv": "8.20.0",
+    "typescript": "5.9.3",
+    "vitest": "4.1.8"
+  }
+}
