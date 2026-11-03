@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Written for Storeshot from https://cursor.com/docs/rules.md (read 2026-11-02); no JSON Schema exists. Storeshot's rule is 'Apply Intelligently': description set, no globs, alwaysApply false.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["description", "alwaysApply"],
+  "properties": {
+    "description": { "type": "string", "minLength": 1, "maxLength": 300 },
+    "alwaysApply": { "const": false }
+  }
+}

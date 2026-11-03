@@ -1,0 +1,17 @@
+---
+description: Making App Store or Google Play screenshots, store listing images or fastlane screenshot folders with Storeshot
+alwaysApply: false
+---
+
+# Store screenshots with Storeshot
+
+- With the Storeshot MCP tools (setup: https://storeshot.art/docs/mcp/): `get_store_requirements`,
+  then `upload_screenshot` for each raw screenshot (portrait PNG, JPEG or WebP), then
+  `create_screenshot_set` with `dryRun: true`.
+- Tell the user what it costs and ask the user before spending live credits: live keys spend 1
+  credit per image, test keys are free and return sample images.
+- Create the set, call `get_job_status` with `waitSeconds` of 50 or less until `final`, then
+  `download_results` with `layout: "fastlane"` into the project root.
+- Never ask for, print or commit an API key. On `ACCOUNT_LINK_REQUIRED`, show the link and code
+  and call `link_status` after the user approves.
+- Without the MCP tools, follow https://storeshot.art/docs/agents-quickstart.md (curl and jq).

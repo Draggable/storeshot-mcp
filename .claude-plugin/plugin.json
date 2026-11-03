@@ -1,0 +1,21 @@
+{
+  "name": "storeshot",
+  "displayName": "Storeshot",
+  "version": "2.55.0",
+  "description": "App Store and Google Play marketing screenshots from your raw app screenshots: the Storeshot MCP server and skill.",
+  "author": {
+    "name": "Draggable",
+    "email": "support@storeshot.art",
+    "url": "https://storeshot.art/"
+  },
+  "homepage": "https://storeshot.art/docs/mcp/",
+  "repository": "https://github.com/Draggable/storeshot-mcp",
+  "license": "Apache-2.0",
+  "keywords": [
+    "app-store",
+    "google-play",
+    "screenshots",
+    "fastlane",
+    "mcp"
+  ]
+}

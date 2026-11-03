@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "storeshot": { "command": "npx", "args": ["-y", "@draggable/storeshot-mcp"] }
+  }
+}

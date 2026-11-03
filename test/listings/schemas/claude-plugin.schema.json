@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Written for Storeshot from https://code.claude.com/docs/en/plugins-reference.md (read 2026-11-02); no official JSON Schema exists. Closed over the fields Storeshot uses.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "version", "description", "author", "license"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "not": {
+        "anyOf": [
+          { "pattern": "^(?:claude|anthropic|anthropics|cc-plugin)-" },
+          { "enum": ["claude", "anthropic", "anthropics", "claude-code", "claude-mods"] },
+          { "pattern": "(?:^|-)(?:claude|anthropic|anthropics)(?:-|$)" }
+        ]
+      }
+    },
+    "displayName": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "description": { "type": "string", "minLength": 1, "maxLength": 300 },
+    "author": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "email": { "type": "string", "pattern": "^[^@\\s]+@[^@\\s]+$" },
+        "url": { "type": "string", "format": "uri", "pattern": "^https://" }
+      }
+    },
+    "homepage": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "repository": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "license": { "const": "Apache-2.0" },
+    "keywords": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+      "uniqueItems": true
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "storeshot",
+  "owner": { "name": "Draggable", "email": "support@storeshot.art" },
+  "description": "Storeshot for Claude Code: App Store and Google Play screenshots.",
+  "plugins": [
+    {
+      "name": "storeshot",
+      "source": "./",
+      "description": "The Storeshot MCP server and the storeshot skill.",
+      "category": "productivity",
+      "tags": ["app-store", "google-play", "screenshots", "fastlane"]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Written for Storeshot from https://agentskills.io/specification and Anthropic's rules (https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview.md, best practices; quick_validate.py in github.com/anthropics/skills), read 2026-11-02; no official JSON Schema exists. Only the six specification fields: claude.ai and the Skills API reject any other key.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "description"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$",
+      "not": { "anyOf": [{ "pattern": "--" }, { "pattern": "anthropic|claude" }] }
+    },
+    "description": { "type": "string", "minLength": 1, "maxLength": 1024, "pattern": "^[^<>]+$" },
+    "license": { "type": "string", "minLength": 1 },
+    "compatibility": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "metadata": { "type": "object", "additionalProperties": { "type": "string" } },
+    "allowed-tools": { "type": "string" }
+  }
+}

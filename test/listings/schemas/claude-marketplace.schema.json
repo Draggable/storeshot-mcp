@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Written for Storeshot from https://code.claude.com/docs/en/plugins/marketplace-reference.md (read 2026-11-02); no official JSON Schema exists. Closed over the fields Storeshot uses; no version on an entry (plugin.json wins and the validator warns when both are set).",
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+      "not": {
+        "anyOf": [
+          { "pattern": "\\.\\." },
+          { "pattern": "^(?:anthropic-|claudeai-)" },
+          {
+            "enum": [
+              "claude-code-marketplace",
+              "claude-plugins-official",
+              "agent-skills",
+              "npm",
+              "github"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "owner", "description", "plugins"],
+  "properties": {
+    "name": { "$ref": "#/$defs/name" },
+    "owner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "email": { "type": "string", "pattern": "^[^@\\s]+@[^@\\s]+$" },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "description": { "type": "string", "minLength": 1 },
+    "plugins": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "source", "description"],
+        "properties": {
+          "name": { "$ref": "#/$defs/name" },
+          "source": { "type": "string", "pattern": "^\\./(?!.*\\.\\.)" },
+          "description": { "type": "string", "minLength": 1 },
+          "category": { "type": "string", "pattern": "^[a-z-]+$" },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+            "uniqueItems": true
+          }
+        }
+      }
+    }
+  }
+}

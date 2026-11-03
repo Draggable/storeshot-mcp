@@ -15,6 +15,7 @@ describe('README (spec §15.2, amendments A1/A2)', () => {
     const headings = [...readme.matchAll(/^## (.+)$/gm)].map((m) => m[1]);
     expect(headings).toEqual([
       'Install',
+      'Agent skill, plugin and rules',
       'Linking your account',
       'Test and live keys',
       'Tools',
@@ -27,7 +28,7 @@ describe('README (spec §15.2, amendments A1/A2)', () => {
       ...(IN_MONOREPO ? [] : ['Source of truth']),
     ]);
     expect(readme).toMatch(/^# @draggable\/storeshot-mcp\n/);
-    expect(readme).toMatch(/Not on npm yet/);
+    expect(readme).not.toMatch(/not on npm|not (yet )?published|once published/i);
     expect(readme.includes('<!-- mirror:monorepo-note -->')).toBe(IN_MONOREPO);
   });
 
@@ -55,6 +56,21 @@ describe('README (spec §15.2, amendments A1/A2)', () => {
     expect(readme).not.toMatch(/[A-Z_]*(KEY|TOKEN|SECRET)=[^\s=]/);
     expect(readme).not.toMatch(/test (mode )?by default|defaults? to test/i);
     expect(readme).not.toContain('@storeshot/mcp');
+  });
+
+  test('the agent skill section (SS-024) points at the repository files, naming no instruction file', () => {
+    const section = readme.split('## Agent skill, plugin and rules')[1].split('\n## ')[0];
+    expect(section).toContain('/plugin marketplace add Draggable/storeshot-mcp');
+    expect(section).toContain('/plugin install storeshot@storeshot');
+    for (const file of [
+      'skills/storeshot',
+      'rules/storeshot.mdc',
+      'snippets/agents-section.md',
+      'snippets/prompt.md',
+    ]) {
+      expect(section).toContain(`\`${file}\``);
+    }
+    expect(section).not.toMatch(/\b(?:CLAUDE|AGENTS)\.md\b|\.claude\//);
   });
 
   test('the tool table lists all nine tools', () => {

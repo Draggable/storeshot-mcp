@@ -6,13 +6,14 @@ your machine over stdio (Node ≥ 18) and gives your coding agent nine tools: re
 upload raw screenshots from your disk, create a whole screenshot set, follow it and save the images
 into your project, fastlane folders included.
 
-> **Not on npm yet.** `@draggable/storeshot-mcp` has not been published. Until it is, build it from
-> this repository with `npm ci && npm run build` and use `"command": "node"` with
-> `"args": ["/absolute/path/to/dist/bin.js"]` instead of `npx` in the snippets below.
+> Published on npm with provenance from its public source repository, `Draggable/storeshot-mcp`
+> on GitHub. To run your own build of it instead, `npm ci && npm run build` there and use
+> `"command": "node"` with `"args": ["/absolute/path/to/dist/bin.js"]` instead of `npx` in the
+> snippets below.
 
 ## Install
 
-Once published, every client starts the server with `npx -y @draggable/storeshot-mcp`.
+Every client starts the server with `npx -y @draggable/storeshot-mcp` (Node 18 or later).
 
 Claude Code:
 
@@ -64,6 +65,24 @@ args = ["-y", "@draggable/storeshot-mcp"]
 
 On Windows some clients need `"command": "cmd"` with `"args": ["/c", "npx", "-y",
 "@draggable/storeshot-mcp"]`.
+
+## Agent skill, plugin and rules
+
+The source repository, `Draggable/storeshot-mcp` on GitHub, is also a Claude Code plugin
+marketplace:
+
+```text
+/plugin marketplace add Draggable/storeshot-mcp
+/plugin install storeshot@storeshot
+```
+
+The plugin adds this MCP server and the `storeshot` skill. From the same repository, for other
+agents:
+
+- the skill on its own: copy `skills/storeshot` into your agent's skills folder;
+- Cursor: copy `rules/storeshot.mdc` into `.cursor/rules/` of your project;
+- an instructions section for agents that read project instructions: `snippets/agents-section.md`;
+- a prompt to paste into any agent: `snippets/prompt.md`.
 
 ## Linking your account
 
@@ -146,11 +165,10 @@ with the reason.
 
 ## Checking with MCP Inspector
 
-From a checkout, after the build, with your API key in the `STORESHOT_API_KEY` variable of your
-shell:
+With your API key in the `STORESHOT_API_KEY` variable of your shell:
 
 ```sh
-npx @modelcontextprotocol/inspector --cli node packages/mcp-server/dist/bin.js --method tools/list
+npx @modelcontextprotocol/inspector --cli npx -y @draggable/storeshot-mcp --method tools/list
 ```
 
 Without `--cli` the Inspector opens its web UI: all nine tools are listed with their input and
@@ -179,8 +197,8 @@ API contract replaces the contents of this repository with one commit tagged `vX
 Issues and pull requests are welcome here. Accepted changes are applied upstream and arrive with
 the next release, so a pull request is closed rather than merged.
 
-The package is not on npm yet. `.github/workflows/publish.yml` publishes it (with npm provenance)
-once it is switched on.
+Every `vX.Y.Z` tag pushed here is published to npm (with npm provenance) by
+`.github/workflows/publish.yml`.
 
 ### Development and tests
 
